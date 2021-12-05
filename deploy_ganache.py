@@ -1,3 +1,5 @@
+# run $ganache-cli --deterministic and keep it running in a separate shell
+
 import json
 from web3 import Web3
 from solcx import compile_standard, install_solc
@@ -44,16 +46,14 @@ abi = json.loads(
     compiled_sol["contracts"]["SimpleStorage.sol"]["SimpleStorage"]["metadata"]
 )["output"]["abi"]
 
-# For connecting to Rinkeby
-w3 = Web3(Web3.HTTPProvider(os.getenv("RINKEBY_RPC_URL")))
-chain_id = 4
-my_address = "0x55D629C9d82DA65cC29583B4e7FAFAF140824B0d"  # MetaMask
-
+# w3 = Web3(Web3.HTTPProvider(os.getenv("RINKEBY_RPC_URL")))
+# chain_id = 4
+#
 # For connecting to ganache
-# w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))  # 7545 for Ganache GUI
-# chain_id = 1337  # although my Ganache GUI shows Network ID 5777
-# my_address = "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1" # Ganache
-# private_key = "0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d" # Ganache
+w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))  # 7545 for Ganache GUI
+chain_id = 1337  # although my Ganache GUI shows Network ID 5777
+my_address = "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1"
+# private_key = "0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d"
 # 0x added in front (if it's not there, e.g. from Ganache GUI) because python always look for hex format of private key
 ## never HARDCODE the private key like this ##
 
